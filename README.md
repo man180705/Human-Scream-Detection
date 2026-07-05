@@ -35,7 +35,7 @@ This project aims to develop a Machine Learning (ML) model capable of detecting 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Samimeel/Human-Scream-Detection-and-Analysis-for-Crime.git
+   git clone https://github.com/man180705/Human-Scream-Detection.git
    ```
 
 2. Create and activate a virtual environment (optional but recommended):
