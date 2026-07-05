@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Scream Detection and Analysis</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .title{
+            font-family: sans-serif;
+        }
+        .form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="file"]::file-selector-button {
+            border: 2px solid #a05e2b;
+            padding: 0.2em 0.4em;
+            border-radius: 0.2em;
+            background-color: #efe0bb;
+            transition: 0.7s;
+        }
+
+        input[type="file"]::file-selector-button:hover {
+            background-color: #a05e2b;
+            border: 2px solid #3b271d;
+        }
+        .submit-btn{
+            background-color: #efe0bb;
+            border: 2px solid #a05e2b;
+            border-radius: 0.2em;
+            transition: 0.7s;
+        }
+        .submit-btn:hover{
+            background-color: #a05e2b;
+            border: 2px solid #3b271d;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">Human Scream Detection and Analysis</h1>
+    <form class="form" action="/predict" method="POST" enctype="multipart/form-data">
+        <div class="choose-file">
+        <label class="audio-input" for="audioFile">Upload File</label>
+        <input class="audio-input" type="file" id="audioFile" name="audioFile" accept="audio/*" required onchange="previewAudio(event)">
+        </div>
+        <br><br>
+        <audio id="audioPlayer" controls style="display: none;"></audio>
+        <br><br>
+        <button class="submit-btn" type="submit">Upload</button>
+    </form>
+
+    {% if result is not none %}
+        <h2 class="result">{{ 'Result: No possibe threat.' if result == 0 else 'Result: Yes, there may be threat.' }}</h2>
+    {% endif %}
+</body>
+<script>
+    function previewAudio(event) {
+        const audioFile = event.target.files[0];
+        const audioPlayer = document.getElementById('audioPlayer');
+        if (audioFile) {
+            const fileURL = URL.createObjectURL(audioFile);
+            audioPlayer.src = fileURL;
+            audioPlayer.style.display = 'block'; 
+        } else {
+            audioPlayer.style.display = 'none'; 
+        }
+    }
+</script>
+</html>
